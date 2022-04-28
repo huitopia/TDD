@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/huitopia/TDD/issues"
   },
-  "homepage": "https://github.com/huitopia/TDD#readme"
+  "homepage": "https://github.com/huitopia/TDD#readme",
+  "dependencies": {
+    "http": "^0.0.1-security"
+  }
 }
