@@ -1,21 +1,28 @@
-const express = require('express');
-// const morgan = require('morgan');
-const app = express();
+// const express = require('express');
+// const app = express();
+const http = require('http');
+const hostname = '127.0.0.1';
+const port = 3000;
 
-function commonmw(req, res, next) {
-  console.log('commonmw');
-  next(new Error('error ouccered'));
-}
+const server = http.createServer((req, res) => {
+  if (req.url === '/') {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World\n');
+  } else if (req.url === '/users') {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('User list');
+  } else {
+    res.statusCode = 404;
+    res.end('Not Found');
+  }
+})
 
-function errormw(err, req, res, next) {
-  console.log(err.message); // 전달 받은 에러 처리
-  next();
-}
+// app.listen(3000, function() {
+//   console.log(`Server is running`);
+// })
 
-// app.use(morgan('combined'));
-app.use(commonmw);
-app.use(errormw);
-
-app.listen(3000, function() {
-  console.log(`Server is running`);
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 })
